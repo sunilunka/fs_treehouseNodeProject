@@ -11,13 +11,15 @@ function printMessage(username, badgeCount, points){
 
 var request = http.get("http://teamtreehouse.com/" + username + ".json", function(response){
   console.dir(response.statusCode);
-  var body = "";
+    var body = "";
   response.on("data", function(chunk){
-    JSON.parse(chunk);
+    body += chunk;  
   });
 
   response.on("end", function(){
-    console.log(body);
+    var profile = JSON.parse(body);
+    printMessage(username, profile.badges.length, profile.points.JavaScript);
+    console.dir(profile);
   });
 
 });
