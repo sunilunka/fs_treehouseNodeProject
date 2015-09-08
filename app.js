@@ -1,4 +1,7 @@
 var profile = require("./profile.js");
 
-profile.get("sunilunka");
+var users = process.argv.slice(2);
+
+
+users.forEach(profile.get);
 
