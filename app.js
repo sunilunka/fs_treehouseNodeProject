@@ -11,13 +11,18 @@ function printMessage(username, badgeCount, points){
 
 var request = http.get("http://teamtreehouse.com/" + username + ".json", function(response){
   console.dir(response.statusCode);
-  request.on("data", function(chunk){
-    console.log("Body: " + chunk);
-})
+  var body = "";
+  response.on("data", function(chunk){
+    JSON.parse(chunk);
+  });
+
+  response.on("end", function(){
+    console.log(body);
+  });
 
 });
 
 
-request.on("error", function(error){
-  console.error(error.message);
-})
+  request.on("error", function(error){
+    console.error(error.message);
+  });
